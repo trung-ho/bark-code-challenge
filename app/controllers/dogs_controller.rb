@@ -1,5 +1,7 @@
 class DogsController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :update, :new, :create, :destroy]
   before_action :set_dog, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_owner, only: [:edit, :update, :create, :destroy]
 
   # GET /dogs
   # GET /dogs.json
@@ -75,5 +77,9 @@ class DogsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def dog_params
     params.require(:dog).permit(:name, :description, :images)
+  end
+
+  def authenticate_owner
+    redirect_to root_path unless @dog.is_owner?(current_user)
   end
 end
