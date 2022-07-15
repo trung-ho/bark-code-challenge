@@ -17,3 +17,4 @@ Run the specs with `rspec`
 Run the server with `rails s`
 
 View the site at http://localhost:3000
+
