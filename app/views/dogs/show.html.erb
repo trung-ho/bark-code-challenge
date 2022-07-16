@@ -11,11 +11,14 @@
     <br>
     <%= link_to "Delete #{@dog.name}'s Profile", dog_path, method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>
-  <% if user_signed_in? && @dog.can_like_by(current_user)%>
-    
-    <%= simple_form_for [@dog, @like] do |f| %>
-      <%= f.button :submit, 'Like' %>
-    <% end %>
 
+  <% if user_signed_in? && @dog.can_like_by?(current_user)%>
+    <% if @dog.liked_by?(current_user)%>
+      <%= simple_form_for [@dog, @like] do |f| %>
+        <%= f.button :submit, 'Like' %>
+      <% end %>
+    <% else %>
+      <p>You liked this dog.</p>
+    <% end %>
   <% end %>
 </section>

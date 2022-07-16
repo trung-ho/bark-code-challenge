@@ -9,7 +9,11 @@ class Dog < ApplicationRecord
     owner == user
   end
 
-  def can_like_by user
+  def can_like_by? user
     owner != user
+  end
+
+  def liked_by? user
+    !followers.include?(user)
   end
 end

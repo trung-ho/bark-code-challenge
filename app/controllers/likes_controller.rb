@@ -3,7 +3,9 @@ class LikesController < ApplicationController
 
   def create
     @like = current_user.likes.new(dog_id_params)
-    @like.save
+    if @like.save
+      redirect_to @like.dog
+    end
   end
 
   private
