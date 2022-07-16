@@ -8,4 +8,8 @@ class Dog < ApplicationRecord
   def is_owner? user
     owner == user
   end
+
+  def can_like_by user
+    owner != user
+  end
 end
