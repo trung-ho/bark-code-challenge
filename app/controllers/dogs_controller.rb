@@ -12,6 +12,7 @@ class DogsController < ApplicationController
   # GET /dogs/1
   # GET /dogs/1.json
   def show
+    @like = @dog.likes.new
   end
 
   # GET /dogs/new
