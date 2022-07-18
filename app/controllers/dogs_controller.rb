@@ -6,7 +6,12 @@ class DogsController < ApplicationController
   # GET /dogs
   # GET /dogs.json
   def index
-    @dogs = Dog.all.page(params[:page])
+    @newest_liked = Dog.left_joins(:likes).
+      group(:id).order('COUNT(likes.id) DESC').
+      where('likes.created_at > ?', 1.hours.ago)
+
+    @other_dogs = Dog.all.where.not(id: @newest_liked.pluck(:id))
+    @dogs = Kaminari.paginate_array(@newest_liked + @other_dogs).page(params[:page]).per(5)
   end
 
   # GET /dogs/1
