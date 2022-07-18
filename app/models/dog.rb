@@ -14,6 +14,6 @@ class Dog < ApplicationRecord
   end
 
   def liked_by? user
-    !followers.include?(user)
+    followers.include?(user)
   end
 end

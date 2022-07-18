@@ -13,7 +13,7 @@
   <% end %>
 
   <% if user_signed_in? && @dog.can_like_by?(current_user)%>
-    <% if @dog.liked_by?(current_user)%>
+    <% if !@dog.liked_by?(current_user)%>
       <%= simple_form_for [@dog, @like] do |f| %>
         <%= f.button :submit, 'Like' %>
       <% end %>
